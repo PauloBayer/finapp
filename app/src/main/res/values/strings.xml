@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FinApp</string>
+    <!-- Main -->
+    <string name="subtitulo">Organize suas finanças de maneira fácil e rápida</string>
+    <string name="btn_cadastrar_transacao">Cadastrar transação</string>
+    <string name="btn_extrato">Emitir extrato</string>
+    <string name="btn_sair">Sair</string>
+
+    <!-- Form -->
+    <string name="spinner_selecionar">Selecione débito ou crédito...</string>
+    <string name="hint_descricao">Digite uma breve descrição...</string>
+    <string name="hint_valor">Valor (ex: 19.99)</string>
+    <string name="btn_cadastrar">Cadastrar</string>
+    <string name="label_debito">Débito</string>
+    <string name="label_credito">Crédito</string>
+
+    <!-- Extrato -->
+    <string name="label_todos">Todos</string>
+    <string name="label_saldo">Saldo:</string>
+</resources>

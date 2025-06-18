@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    android:padding="16dp">
+
+    <!-- Saldo -->
+    <TextView
+        android:id="@+id/tvSaldoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_saldo"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSaldo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 0,00"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvSaldoLabel"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Rótulo do filtro -->
+    <TextView
+        android:id="@+id/tvFiltroLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filtro"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSaldoLabel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Spinner Filtro -->
+    <Spinner
+        android:id="@+id/spinnerFiltro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_spinner"
+        android:padding="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/tvFiltroLabel"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Lista de transações -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/spinnerFiltro"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
