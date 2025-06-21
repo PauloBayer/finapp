@@ -4,4 +4,12 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_primary">#07003D</color>
     <color name="hint">#9E9E9E</color>
+    <color name="cartao_fundo">#1A0A4A</color>
+    <color name="cartao_borda">#2D1B69</color>
+    <color name="botao_azul">#5B5BFF</color>
+    <color name="botao_azul_pressionado">#4545E5</color>
+    <color name="verde_positivo">#34C759</color>
+    <color name="vermelho_negativo">#FF3B30</color>
+    <color name="superficie_escura">#1A0A4A</color>
+    <color name="texto_secundario">#B8B8FF</color>
 </resources>

@@ -31,17 +31,30 @@ class StatementActivity : AppCompatActivity() {
         binding = ActivityStatementBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // RecyclerView
+        configurarBotaoVoltar()
+        configurarRecyclerView()
+        configurarFiltro()
+        configurarSaldo()
+        observarTransacoes(null)
+    }
+
+    private fun configurarBotaoVoltar() {
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun configurarRecyclerView() {
         binding.recycler.apply {
             layoutManager = LinearLayoutManager(this@StatementActivity)
             adapter = this@StatementActivity.adapter
-            // Espaço vertical de 8 dp entre os itens
             addItemDecoration(
                 VerticalSpace(resources.getDimensionPixelSize(R.dimen.item_spacing))
             )
         }
+    }
 
-        // Spinner de filtro
+    private fun configurarFiltro() {
         val filtros = listOf(
             getString(R.string.label_todos)  to null,
             getString(R.string.label_debito) to TransactionType.DEBIT,
@@ -50,9 +63,9 @@ class StatementActivity : AppCompatActivity() {
 
         val filtroAdapter = ArrayAdapter(
             this,
-            R.layout.item_dropdown,
+            R.layout.item_spinner,
             filtros.map { it.first }
-        ).apply { setDropDownViewResource(R.layout.item_dropdown) }
+        ).apply { setDropDownViewResource(R.layout.item_spinner_dropdown) }
 
         binding.spinnerFiltro.adapter = filtroAdapter
 
@@ -65,14 +78,12 @@ class StatementActivity : AppCompatActivity() {
                 }
                 override fun onNothingSelected(parent: AdapterView<*>) {}
             }
+    }
 
-        // Saldo em tempo real
+    private fun configurarSaldo() {
         lifecycleScope.launch {
             dao.balance().collectLatest { binding.tvSaldo.text = nf.format(it) }
         }
-
-        // Lista inicial
-        observarTransacoes(null)
     }
 
     private fun observarTransacoes(type: TransactionType?) {

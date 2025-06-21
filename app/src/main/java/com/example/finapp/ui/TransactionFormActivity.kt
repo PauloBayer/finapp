@@ -31,20 +31,34 @@ class TransactionFormActivity : AppCompatActivity() {
         binding = ActivityTransactionFormBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Exibe saldo atual no topo
+        configurarBotaoVoltar()
+        configurarSaldoAtual()
+        configurarSpinner()
+        configurarMascaraMonetaria()
+        configurarBotaoCadastrar()
+    }
+
+    private fun configurarBotaoVoltar() {
+        binding.btnVoltar.setOnClickListener {
+            finish()
+        }
+    }
+
+    private fun configurarSaldoAtual() {
         lifecycleScope.launch {
             dao.balance().collectLatest { saldo ->
                 binding.tvValorHint.text = nfBR.format(saldo)
             }
         }
+    }
 
-        // Spinner Débito / Crédito
+    private fun configurarSpinner() {
         val labels = listOf(
             getString(R.string.label_debito),
             getString(R.string.label_credito)
         )
-        val spinnerAdapter = ArrayAdapter(this, R.layout.item_dropdown, labels).apply {
-            setDropDownViewResource(R.layout.item_dropdown)
+        val spinnerAdapter = ArrayAdapter(this, R.layout.item_spinner, labels).apply {
+            setDropDownViewResource(R.layout.item_spinner_dropdown)
         }
         binding.spinnerTipo.adapter = spinnerAdapter
         binding.spinnerTipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -53,11 +67,13 @@ class TransactionFormActivity : AppCompatActivity() {
             }
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
 
-        // Máscara monetária
+    private fun configurarMascaraMonetaria() {
         setupCurrencyMask()
+    }
 
-        // Botão Cadastrar
+    private fun configurarBotaoCadastrar() {
         binding.btnCadastrar.setOnClickListener {
             val raw   = binding.etValor.text.toString().replace(Regex("[^0-9]"), "")
             val valor = raw.toDoubleOrNull()?.div(100)
@@ -75,6 +91,7 @@ class TransactionFormActivity : AppCompatActivity() {
                         )
                     )
                     toast("Transação salva!")
+                    setResult(RESULT_OK)
                     finish()
                 }
             }
